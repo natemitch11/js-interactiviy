@@ -4,7 +4,8 @@ let message = document.querySelector("#message")
 
 const deleteMovie = (e) => {
     e.target.parentNode.remove()
-    message.textContent = "Movie Deleted!"
+    message.textContent = `${e.target.parentNode.firstChild.textContent} Removed!`
+    revealMessage()
 }
 
 const addMovie = (e) => {
@@ -31,10 +32,19 @@ const addMovie = (e) => {
 function crossOffMovie(e) {
     e.target.classList.toggle("checked")
     if (e.target.classList.contains("checked")) {
-        message.textContent = "Movie Watched!"
+        message.textContent = `${e.target.textContent} Watched!`
     } else {
-        message.textContent = "Added to Watchlist"
+        message.textContent = `Added ${e.target.textContent} to Watchlist`
     }
+    revealMessage()
+}
+
+function revealMessage() {
+    message.classList.remove("hide") 
+
+    setTimeout(() => {
+        message.classList.add("hide")
+    }, 1000)
 }
 
 document.querySelector('form').addEventListener('submit', addMovie)
